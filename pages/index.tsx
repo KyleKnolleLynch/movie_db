@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Link from 'next/link'
 import type { NextPage } from 'next'
 //  Fetch hook
 import { useFetchMovies } from '../api/fetchHooks'
@@ -17,10 +18,17 @@ const Home: NextPage = () => {
   const { data, fetchNextPage, isLoading, isFetching, error } =
     useFetchMovies(query)
 
-  console.log(data)
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.currentTarget
+
+    if (scrollHeight - scrollTop === clientHeight) fetchNextPage()
+  }
 
   return (
-    <div className='relative h-screen overflow-y-scroll'>
+    <div
+      className='relative h-screen overflow-y-scroll'
+      onScroll={handleScroll}
+    >
       <Header setQuery={setQuery} />
       <main>
         {!query && data && data.pages ? (
@@ -37,9 +45,33 @@ const Home: NextPage = () => {
           />
         ) : null}
 
-        <Grid />
-        <Card />
-        <Spinner />
+        <Grid
+          className='p-4 max-w-7xl m-auto'
+          title={
+            query
+              ? `Search Results: ${data?.pages[0].total_results}`
+              : 'Popular Movies'
+          }
+        >
+          {data?.pages?.map(page =>
+            page.results.map(movie => (
+              <Link key={movie.id} href={`/${movie.id}`}>
+                <article className='cursor-pointer hover:opacity-80 duration-300'>
+                  <Card
+                    imgUrl={
+                      movie.poster_path
+                        ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                        : '/no_image/jpg'
+                    }
+                    title={movie.original_title}
+                  />
+                </article>
+              </Link>
+            ))
+          )}
+        </Grid>
+
+        {isLoading || (isFetching && <Spinner />)}
       </main>
     </div>
   )
