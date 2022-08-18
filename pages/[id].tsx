@@ -29,10 +29,25 @@ const Movie: NextPage<Props> = ({ movie, cast, directors }) => (
     <Header />
     <main>
       <Breadcrumb title={movie.original_title} />
-      <MovieInfo />
-      <Grid>
+      <MovieInfo
+        thumbUrl={
+          movie.poster_path
+            ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+            : '/no_image.jpg'
+        }
+        rating={movie.vote_average}
+        year={movie.release_date.split('-')[0]}
+        backgroundImgUrl={movie.backdrop_path ? IMAGE_BASE_URL + BACKDROP_SIZE + movie.backdrop_path : '/no_image.jpg'}
+        title={movie.original_title}
+        summary={movie.overview}
+        directors={directors}
+        time={movie.runtime}
+        budget={movie.budget}
+        revenue={movie.revenue}
+      />
+      {/* <Grid>
         <Card />
-      </Grid>
+      </Grid> */}
     </main>
   </>
 )
@@ -50,7 +65,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
   //  Get the directiors only
   const directors = credits.crew.filter(member => member.job === 'Director')
-
+ 
   return {
     props: {
       movie,
