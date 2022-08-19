@@ -24,6 +24,8 @@ const Home: NextPage = () => {
     if (scrollHeight - scrollTop === clientHeight) fetchNextPage()
   }
 
+  if (error) return <div>Sorry, something went wrong!</div>
+
   return (
     <div
       className='relative h-screen overflow-y-scroll'
