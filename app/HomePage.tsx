@@ -1,6 +1,7 @@
+'use client'
+
 import React, { useState } from 'react'
 import Link from 'next/link'
-import type { NextPage } from 'next'
 //  Fetch hook
 import { useFetchMovies } from '../api/fetchHooks'
 //  Config
@@ -12,7 +13,7 @@ import { Grid } from '../components/Grid/Grid'
 import { Card } from '../components/Card/Card'
 import { Spinner } from '../components/Spinner/Spinner'
 
-const Home: NextPage = () => {
+const Home = () => {
   const [query, setQuery] = useState('')
 
   const { data, fetchNextPage, isLoading, isFetching, error } =

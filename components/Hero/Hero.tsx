@@ -18,9 +18,8 @@ const Hero = ({ imgUrl, title, text }: Props) => (
       src={imgUrl}
       alt='hero-image'
       priority
-      objectFit='cover'
-      objectPosition='center'
-      layout='fill'
+      fill
+      className='object-cover'
     />
   </section>
 )

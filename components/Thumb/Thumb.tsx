@@ -9,10 +9,10 @@ const Thumb = ({imgUrl}: Props) => (
         src={imgUrl}
         alt='thumb'
         placeholder='blur'
-        blurDataURL='/placeholder.jpg'
-        className='rounded-lg'
-        layout='fill'
-        objectFit='cover'
+        blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8nshbDwAFIgHGVexZ3gAAAABJRU5ErkJggg=='
+        className='rounded-lg object-cover'
+        fill
+        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 20vw'
     />
 )
 

@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 //  Components
 import { SearchInput } from '../SearchInput/SearchInput'
+//  Images
+import RMDBLogoSm from '../../public/rmdb-logo-small.svg'
 
 type Props = {
   setQuery?: Dispatch<SetStateAction<string>>
@@ -13,12 +15,10 @@ const Header = ({ setQuery }: Props) => {
     <header className='sticky flex top-0 z-40 w-full h-24 bg-zinc-900'>
       <div className='flex justify-between w-full max-w-7xl h-full mx-auto px-4'>
         <Link href='/'>
-          <div className='flex items-center cursor-pointer'>
+          <div className='flex items-center cursor-pointer pt-2'>
             <div>
               <Image
-                width='60'
-                height='60'
-                src='/rmdb-logo-small.svg'
+                src={RMDBLogoSm}
                 alt='rmdb-logo'
               />
             </div>
